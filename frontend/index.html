@@ -1,0 +1,143 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Emoji Reaction App</title>
+    <link rel="stylesheet" href="style.css">
+</head>
+<body>
+    <div class="container">
+        <div class="header">
+            <h1>Emoji Reactor</h1>
+            <p>Share your message and see how it feels!</p>
+        </div>
+        
+        <div class="input-section">
+            <input 
+                type="text" 
+                class="message-input" 
+                placeholder="Type your message..."
+                maxlength="280"
+            >
+            <button class="react-button">React</button>
+        </div>
+        
+        <div class="emoji-display">
+            <div class="emoji-face">
+                <div class="eyebrow left"></div>
+                <div class="eyebrow right"></div>
+                <div class="eye left">
+                    <div class="pupil"></div>
+                </div>
+                <div class="eye right">
+                    <div class="pupil"></div>
+                </div>
+                <div class="mouth neutral"></div>
+            </div>
+        </div>
+        <div class="display-label">Developed By : Muzamil Suleman</div>
+    </div>
+    <script>
+        
+        let inputBox = document.getElementsByClassName("message-input")[0];
+        let reactionBtn = document.getElementsByClassName("react-button")[0];
+        let pupils = document.getElementsByClassName("pupil");
+        let eyebrow = document.getElementsByClassName("eyebrow");
+        let mouth  = document.getElementsByClassName("mouth")[0];
+        let face = document.getElementsByClassName("emoji-display")[0];
+        function happy(){
+            neutral();
+            mouth.className = "mouth happyMouth";   
+            pupils[0].className = "pupil look-right"
+            pupils[1].className = "pupil look-right"
+            face.className = "emoji-display ";
+            eyebrow[0].className = "eyebrow left ";
+            eyebrow[1].className = "eyebrow right  ";    
+        }
+
+            function angry(){
+             neutral();
+            face.className = "emoji-display redFace";
+            mouth.className = "mouth angryMouth";
+            eyebrow[0].className = "eyebrow left angry";
+            eyebrow[1].className = "eyebrow right angry ";    
+            pupils[0].className = "pupil look-right"
+            pupils[1].className = "pupil look-left"
+        }
+        function neutral(){
+              mouth.className = "mouth ";
+            eyebrow[0].className = "eyebrow left ";
+            eyebrow[1].className = "eyebrow right  ";    
+            face.className = "emoji-display";
+              pupils[0].className = "pupil "
+            pupils[1].className = "pupil "
+        }
+        function sad(){
+            neutral()
+            mouth.className = "mouth angryMouth";
+            eyebrow[0].className = "eyebrow right sad";
+            eyebrow[1].className = "eyebrow left sad";
+             pupils[0].className = "pupil look-down"
+            pupils[1].className = "pupil look-down"
+        }
+        function unknown(){
+
+
+            mouth.className = "mouth unknown";
+        }
+
+
+        
+
+        reactionBtn.onclick = ()=>{
+
+            fetch("http://127.0.0.1:8000/reaction/",
+            {
+                method:"POST",
+                headers: {
+                "Content-Type": "application/json"
+                },
+                body:JSON.stringify({txt:inputBox.value})
+            }
+            ).then(response => response.json())
+            .then((data)=>{
+
+               let polar = parseFloat(data.response[0].toFixed(3));
+                let sub = parseFloat(data.response[1].toFixed(3));
+                if (polar >= -0.1 && polar <= 0.1) {
+                   neutral();
+} else if (polar > 0.3 && sub > 0.6) {
+    happy();
+} else if (polar <= -0.6 && sub >= 0.7) {
+    angry();
+} else if (polar > -0.6 && polar <= -0.2 && sub >= 0.4) {
+    sad();
+    
+} else {
+    unknown();
+}
+
+
+            })
+            
+                
+           
+
+
+
+
+
+                
+            
+
+
+        }
+
+
+
+
+
+    </script>
+</body>
+</html>

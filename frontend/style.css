@@ -1,0 +1,421 @@
+* {
+    margin: 0;
+    padding: 0;
+    box-sizing: border-box;
+}
+
+body {
+    font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, Oxygen, Ubuntu, Cantarell, sans-serif;
+    background: linear-gradient(135deg, #f5f7fa 0%, #c3cfe2 100%);
+    min-height: 100vh;
+    
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    padding: 20px;
+}
+
+.container {
+    background: white;
+    border-radius: 24px;
+    padding: 40px;
+    box-shadow: 0 20px 40px rgba(0, 0, 0, 0.1);
+    max-width: 500px;
+    width: 100%;
+    display: flex;
+    flex-direction: column;
+    gap: 30px;
+    align-items: center;
+}
+
+.header {
+    text-align: center;
+    margin-bottom: 10px;
+}
+
+.header h1 {
+    color: #2d3748;
+    font-size: 2rem;
+    font-weight: 600;
+    margin-bottom: 8px;
+}
+
+.header p {
+    color: #718096;
+    font-size: 1rem;
+}
+
+.input-section {
+    width: 100%;
+    display: flex;
+    flex-direction: column;
+    gap: 16px;
+}
+
+.message-input {
+    width: 100%;
+    padding: 16px 20px;
+    border: 2px solid #e2e8f0;
+    border-radius: 16px;
+    font-size: 1rem;
+    outline: none;
+    transition: all 0.3s ease;
+    background: #f8fafc;
+}
+
+.message-input:focus {
+    border-color: #667eea;
+    background: white;
+    box-shadow: 0 0 0 3px rgba(102, 126, 234, 0.1);
+}
+
+.message-input::placeholder {
+    color: #a0aec0;
+}
+
+.react-button {
+    padding: 16px 32px;
+    background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
+    color: white;
+    border: none;
+    border-radius: 16px;
+    font-size: 1.1rem;
+    font-weight: 600;
+    cursor: pointer;
+    transition: all 0.3s ease;
+    align-self: center;
+    min-width: 120px;
+}
+
+.react-button:hover {
+    transform: translateY(-2px);
+    box-shadow: 0 8px 25px rgba(102, 126, 234, 0.3);
+}
+
+.react-button:active {
+    transform: translateY(0);
+}
+
+.emoji-display {
+    width: 200px;
+    height: 200px;
+    background: linear-gradient(135deg, #ffd93d 0%, #ffb74d 100%);
+    border-radius: 50%;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    box-shadow: 0 10px 30px rgba(0, 0, 0, 0.15);
+    transition: all 0.3s ease;
+    position: relative;
+    overflow: hidden;
+}
+.redFace{
+    background: linear-gradient(135deg, #ff4e50 0%, #f9d423 100%);
+}
+.unknown{
+    border: 0 0 0 0;
+}
+.emoji-display::before {
+    content: '';
+    position: absolute;
+    top: 0;
+    left: 0;
+    right: 0;
+    bottom: 0;
+    background: linear-gradient(45deg, rgba(255, 255, 255, 0.3) 0%, transparent 100%);
+    border-radius: 50%;
+}
+
+.emoji-display:hover {
+    transform: scale(1.05);
+    box-shadow: 0 15px 40px rgba(0, 0, 0, 0.2);
+}
+
+.emoji-face {
+    position: relative;
+    z-index: 1;
+    width: 170px;
+    height: 170px;
+}
+
+.eyebrow {
+    position: absolute;
+    width: 40px;
+    height: 6px;
+    background: #8B4513;
+    border-radius: 3px;
+    transition: all 0.3s ease;
+}
+
+.eyebrow.left {
+    top: 25px;
+    left: 30px;
+}
+
+.eyebrow.right {
+    top: 25px;
+    right: 30px;
+}
+
+.eye {
+    position: absolute;
+    width: 55px;
+    height: 55px;
+    background: radial-gradient(ellipse at 30% 30%, #ffffff 0%, #f0f0f0 70%, #e0e0e0 100%);
+    border-radius: 50%;
+    box-shadow: inset 0 2px 4px rgba(0, 0, 0, 0.1), 0 1px 2px rgba(0, 0, 0, 0.1);
+}
+
+.eye.left {
+    top: 45px;
+    left: 25px;
+}
+
+.eye.right {
+    top: 45px;
+    right: 25px;
+}
+
+.pupil {
+    position: absolute;
+    width: 22px;
+    height: 22px;
+    background: radial-gradient(circle at 30% 30%, #4a4a4a 0%, #000000 70%);
+    border-radius: 50%;
+    top: 50%;
+    left: 50%;
+    transform: translate(-50%, -50%);
+    transition: all 0.2s ease;
+    box-shadow: 0 1px 2px rgba(0, 0, 0, 0.3);
+}
+
+.mouth {
+    position: absolute;
+    bottom: 40px;
+    left: 50%;
+    transform: translateX(-50%);
+    width: 45px;
+    height: 5px;
+    background: linear-gradient(to right, #8B4513, #A0522D, #8B4513);
+    border-radius: 2px;
+    transition: all 0.3s ease;
+    box-shadow: 0 1px 2px rgba(0, 0, 0, 0.2);
+}
+
+/* Mouth Expression Classes */
+.happyMouth {
+    width: 50px;
+    height: 25px;
+    border: 3px solid #8B4513;
+    border-top: none;
+    border-radius: 0 0 50px 50px;
+    background: transparent;
+    box-shadow: none;
+}
+.angryMouth{
+    width: 50px;
+    height: 25px;
+    border: 3px solid #8B4513;
+   border-bottom:none;
+    border-radius: 50px 50px 0 0;
+    background: transparent;
+    box-shadow: none;
+
+
+
+}
+.sadMouth {
+    width: 50px;
+    height: 25px;
+    border: 3px solid #8B4513;
+    border-bottom: none;
+    background: transparent;
+    transform: translateX(-50%) rotate(180deg);
+    box-shadow: none;
+}
+
+.neutral {
+    width: 45px;
+    height: 5px;
+    background: linear-gradient(to right, #8B4513, #A0522D, #8B4513);
+    border: none;
+    border-radius: 2px;
+}
+
+/* Pupil Position Classes */
+.look-left {
+    transform: translate(-70%, -50%);
+}
+
+.look-right {
+    transform: translate(-30%, -50%);
+}
+
+.look-up {
+    transform: translate(-50%, -70%);
+}
+
+.look-down {
+    transform: translate(-50%, -30%);
+}
+
+/* Eyebrow Expression Classes */
+.eyebrow.raised {
+    transform: translateY(-8px);
+}
+
+.eyebrow.left.angry {
+    transform: rotate(15deg);
+}
+
+.eyebrow.right.angry {
+    transform: rotate(-15deg);
+}
+
+.eyebrow.left.sad {
+    transform: rotate(-15deg);
+}
+
+.eyebrow.right.sad {
+    transform: rotate(15deg);
+}
+
+
+
+.eyebrow.surprised {
+    transform: translateY(-12px) rotate(-5deg);
+}
+
+.eyebrow.right.surprised {
+    transform: translateY(-12px) rotate(5deg);
+}
+
+/* Eye States */
+.eye.closed {
+    height: 8px;
+    background: #8B4513;
+    border-radius: 50px;
+    box-shadow: none;
+}
+
+.display-label {
+    color: #4a5568;
+    font-size: 0.9rem;
+    font-weight: 500;
+    text-align: center;
+    margin-top: 16px;
+}
+
+@media (max-width: 600px) {
+    .container {
+        padding: 30px 20px;
+        margin: 10px;
+    }
+
+    .header h1 {
+        font-size: 1.5rem;
+    }
+
+    .emoji-face {
+        width: 140px;
+        height: 140px;
+    }
+
+    .eyebrow {
+        width: 30px;
+        height: 5px;
+    }
+
+    .eyebrow.left {
+        top: 20px;
+        left: 20px;
+    }
+
+    .eyebrow.right {
+        top: 20px;
+        right: 20px;
+    }
+
+    .eye {
+        width: 45px;
+        height: 45px;
+    }
+
+    .eye.left {
+        top: 35px;
+        left: 20px;
+    }
+
+    .eye.right {
+        top: 35px;
+        right: 20px;
+    }
+
+    .pupil {
+        width: 18px;
+        height: 18px;
+    }
+
+    .mouth {
+        width: 35px;
+        height: 4px;
+        bottom: 30px;
+    }
+
+    .react-button {
+        width: 100%;
+    }
+}
+
+@media (max-width: 400px) {
+    .emoji-display {
+        width: 140px;
+        height: 140px;
+    }
+
+    .emoji-face {
+        width: 120px;
+        height: 120px;
+    }
+
+    .eyebrow {
+        width: 25px;
+        height: 4px;
+    }
+
+    .eyebrow.left {
+        top: 15px;
+        left: 15px;
+    }
+
+    .eyebrow.right {
+        top: 15px;
+        right: 15px;
+    }
+
+    .eye {
+        width: 38px;
+        height: 38px;
+    }
+
+    .eye.left {
+        top: 30px;
+        left: 15px;
+    }
+
+    .eye.right {
+        top: 30px;
+        right: 15px;
+    }
+
+    .pupil {
+        width: 15px;
+        height: 15px;
+    }
+
+    .mouth {
+        width: 30px;
+        height: 4px;
+        bottom: 25px;
+    }
+}
