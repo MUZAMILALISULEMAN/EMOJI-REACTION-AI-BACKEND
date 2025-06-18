@@ -2,6 +2,9 @@
 
 A simple and fun web app that reads your **typed message** and reacts with an **appropriate emoji** based on the detected emotion using AI.
 
+**Preview Image**
+![App Screenshot](./assets/emoji-reactor-preview.png)
+
 🌐 **Live Demo**: [Click to Try](https://muzamilalisuleman.github.io/EMOJI-REACTION-AI-INTEGRATED/)
 
 ---
