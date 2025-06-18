@@ -2,7 +2,7 @@
 
 A simple and fun web app that reads your **typed message** and reacts with an **appropriate emoji** based on the detected emotion using AI.
 
-**Preview Image**
+🖼️**Preview Image**
 <p>
 <img src="./assets/emoji-reactor-preview.png" alt="App Preview" height="600"/>
 </p>
